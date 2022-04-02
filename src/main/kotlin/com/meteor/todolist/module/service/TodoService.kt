@@ -11,7 +11,7 @@ class TodoService(
 ) {
 
     /**
-     * 할 일 리스트 전부 조회
+     * 할 일 리스트 전체 조회
      */
     fun getTodos(): MutableIterable<Todo> = todoRepository.findAllByOrderByIdDesc()
 
