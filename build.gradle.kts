@@ -22,6 +22,7 @@ repositories {
     mavenCentral()
 }
 
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
@@ -33,6 +34,17 @@ dependencies {
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    // JWT Token
+    implementation ("io.jsonwebtoken:jjwt:0.9.1")
+    // Security
+    implementation ("org.springframework.boot:spring-boot-starter-security")
+    testImplementation ("org.springframework.security:spring-security-test")
+    // jackson
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+
+
 }
 
 allOpen {

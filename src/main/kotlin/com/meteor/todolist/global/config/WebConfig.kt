@@ -1,4 +1,4 @@
-package com.meteor.todolist.config
+package com.meteor.todolist.global.config
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod

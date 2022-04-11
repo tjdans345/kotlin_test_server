@@ -1,6 +1,6 @@
-package com.meteor.todolist.module.repository
+package com.meteor.todolist.domain.todo.repository
 
-import com.meteor.todolist.module.domain.Todo
+import com.meteor.todolist.domain.todo.domain.dto.response.Todo
 import org.springframework.data.repository.CrudRepository
 
 interface TodoRepository : CrudRepository<Todo, Long> {

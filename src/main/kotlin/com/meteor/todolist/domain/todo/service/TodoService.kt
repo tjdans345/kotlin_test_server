@@ -1,7 +1,7 @@
-package com.meteor.todolist.module.service
+package com.meteor.todolist.domain.todo.service
 
-import com.meteor.todolist.module.domain.Todo
-import com.meteor.todolist.module.repository.TodoRepository
+import com.meteor.todolist.domain.todo.domain.dto.response.Todo
+import com.meteor.todolist.domain.todo.repository.TodoRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 

@@ -1,10 +1,8 @@
-package com.meteor.todolist.module.controller
+package com.meteor.todolist.domain.todo.controller
 
-import com.meteor.todolist.module.domain.Todo
-import com.meteor.todolist.module.domain.request.TodoRequest
-import com.meteor.todolist.module.service.TodoService
-import org.springframework.http.HttpEntity
-import org.springframework.http.ResponseEntity
+import com.meteor.todolist.domain.todo.domain.dto.response.Todo
+import com.meteor.todolist.domain.todo.domain.dto.request.TodoRequest
+import com.meteor.todolist.domain.todo.service.TodoService
 import org.springframework.web.bind.annotation.*
 
 @RestController
