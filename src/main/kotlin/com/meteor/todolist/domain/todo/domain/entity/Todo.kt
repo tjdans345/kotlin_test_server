@@ -1,4 +1,4 @@
-package com.meteor.todolist.domain.todo.domain.dto.response
+package com.meteor.todolist.domain.todo.domain.entity
 
 import org.hibernate.annotations.ColumnDefault
 import javax.persistence.*

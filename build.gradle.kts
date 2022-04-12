@@ -35,6 +35,7 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
+
     // JWT Token
     implementation ("io.jsonwebtoken:jjwt:0.9.1")
     // Security
@@ -42,7 +43,8 @@ dependencies {
     testImplementation ("org.springframework.security:spring-security-test")
     // jackson
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-
+    // Gson
+    implementation ("com.google.code.gson:gson:2.8.7")
 
 
 }

@@ -1,6 +1,6 @@
 package com.meteor.todolist.domain.todo.controller
 
-import com.meteor.todolist.domain.todo.domain.dto.response.Todo
+import com.meteor.todolist.domain.todo.domain.entity.Todo
 import com.meteor.todolist.domain.todo.domain.dto.request.TodoRequest
 import com.meteor.todolist.domain.todo.service.TodoService
 import org.springframework.web.bind.annotation.*
