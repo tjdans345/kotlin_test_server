@@ -34,7 +34,7 @@ class SecurityConfig (private val jwtTokenProvider : JwtTokenProvider) : WebSecu
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 토큰 기반이므로 세션 사용 x
             .and()
             .authorizeRequests() // 요청에 대한 사용권한 체크
-            .antMatchers("/api/**", "/valid/**").authenticated()
+            .antMatchers("/api/**").authenticated()
             .antMatchers("/register/**", "/login/**", "/logout/**").permitAll() // 해당 경로는 누구나 접근 가능
             .and()
             .addFilterBefore(JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter::class.java)

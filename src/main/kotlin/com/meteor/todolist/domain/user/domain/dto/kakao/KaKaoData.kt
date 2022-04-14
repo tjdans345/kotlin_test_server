@@ -1,4 +1,4 @@
-package com.meteor.todolist.domain.user.domain.dto
+package com.meteor.todolist.domain.user.domain.dto.kakao
 import com.fasterxml.jackson.annotation.JsonProperty
 
 data class KaKaoData(

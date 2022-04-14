@@ -1,17 +1,13 @@
 package com.meteor.todolist.domain.user.service
 
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.google.gson.Gson
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
-import com.meteor.todolist.domain.user.domain.dto.KaKaoData
+import com.meteor.todolist.domain.user.domain.dto.kakao.KaKaoData
 import com.meteor.todolist.domain.user.domain.dto.UserLoginReq
 import com.meteor.todolist.domain.user.domain.dto.UserRegisterReq
+import com.meteor.todolist.domain.user.domain.dto.naver.NaverData
 import com.meteor.todolist.domain.user.domain.entity.User
 import com.meteor.todolist.domain.user.repository.UserRepository
 import com.meteor.todolist.global.config.jwt.JwtTokenProvider
-import org.springframework.boot.jackson.JsonObjectSerializer
-import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -22,19 +18,11 @@ import java.net.URL
 class UserService (private val userRepository: UserRepository, private val jwtTokenProvider: JwtTokenProvider) {
 
     fun getResponseFromKakao(kakaoAccessToken: String): KaKaoData {
-        val mapper = jacksonObjectMapper()
-
-        val url = URL("https://kapi.kakao.com/v2/user/me")
-        val con: HttpURLConnection = url.openConnection() as HttpURLConnection
-
+        val con: HttpURLConnection = URL("https://kapi.kakao.com/v2/user/me").openConnection() as HttpURLConnection
         con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded")
         con.setRequestProperty("Authorization", "Bearer $kakaoAccessToken")
 
         val responseCode: Int = con.responseCode
-
-
-        if (responseCode != HttpStatus.OK.value())
-            println("토큰 값 이상함!!!")
 
         val br = BufferedReader(InputStreamReader(con.inputStream))
         val content = br.readText()
@@ -46,6 +34,22 @@ class UserService (private val userRepository: UserRepository, private val jwtTo
         println(data)
         println(content)
         println(responseCode)
+
+        return data;
+    }
+
+    fun getResponseFromNaver(NaverAccessToken: String): NaverData {
+        val con: HttpURLConnection = URL("https://openapi.naver.com/v1/nid/me").openConnection() as HttpURLConnection
+        con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded")
+        con.setRequestProperty("Authorization", "Bearer $NaverAccessToken")
+
+        val responseCode: Int = con.responseCode
+
+        val br = BufferedReader(InputStreamReader(con.inputStream))
+        val content = br.readText()
+        br.close()
+
+        val data = Gson().fromJson(content, NaverData::class.java)
 
         return data;
     }

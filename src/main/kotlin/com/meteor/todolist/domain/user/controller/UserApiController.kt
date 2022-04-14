@@ -1,9 +1,10 @@
 package com.meteor.todolist.domain.user.controller
 
-import com.meteor.todolist.domain.user.domain.dto.KaKaoData
-import com.meteor.todolist.domain.user.domain.dto.KakaoTokenReq
+import com.meteor.todolist.domain.user.domain.dto.kakao.KaKaoData
+import com.meteor.todolist.domain.user.domain.dto.TokenReq
 import com.meteor.todolist.domain.user.domain.dto.UserLoginReq
 import com.meteor.todolist.domain.user.domain.dto.UserRegisterReq
+import com.meteor.todolist.domain.user.domain.dto.naver.NaverData
 import com.meteor.todolist.domain.user.domain.entity.User
 import com.meteor.todolist.domain.user.service.UserService
 import org.springframework.http.ResponseEntity
@@ -15,16 +16,21 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class UserApiController (private val userService: UserService, private val passwordEncoder: PasswordEncoder) {
 
-    @PostMapping("/valid")
-    fun tokenCheck(@RequestBody kakaoTokenReq: KakaoTokenReq) : ResponseEntity<KaKaoData> {
-        return ResponseEntity.ok().body(userService.getResponseFromKakao(kakaoTokenReq.token))
+    @PostMapping("/kakao")
+    fun kakaoTokenCheck(@RequestBody tokenReq: TokenReq) : ResponseEntity<KaKaoData> {
+        return ResponseEntity.ok().body(userService.getResponseFromKakao(tokenReq.token))
+    }
+
+    @PostMapping("/naver")
+    fun naverTokenCheck(@RequestBody tokenReq: TokenReq) : ResponseEntity<NaverData> {
+
+        return ResponseEntity.ok().body(userService.getResponseFromNaver(tokenReq.token))
     }
 
     @PostMapping("/register")
     fun register(@RequestBody userRegisterReq: UserRegisterReq): ResponseEntity<User> {
 
         if(userService.existsUser(userRegisterReq.userEmail)) {
-            println("여긴데")
             throw Exception("no email");
         }
         userRegisterReq.userPassword = passwordEncoder.encode(userRegisterReq.userPassword)
