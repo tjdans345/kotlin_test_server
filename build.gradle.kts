@@ -45,6 +45,8 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     // Gson
     implementation ("com.google.code.gson:gson:2.8.7")
+    // Validation
+    implementation ("org.springframework.boot:spring-boot-starter-validation")
 
 
 }

@@ -66,7 +66,7 @@ class UserService (private val userRepository: UserRepository, private val jwtTo
     }
 
     fun createUser(userRegisterReq: UserRegisterReq): User {
-        val user = User(userRegisterReq.username ,userRegisterReq.userEmail, userRegisterReq.userPassword)
+        val user = User(userRegisterReq.username!! ,userRegisterReq.userEmail, userRegisterReq.userPassword)
         return userRepository.save(user)
     }
 

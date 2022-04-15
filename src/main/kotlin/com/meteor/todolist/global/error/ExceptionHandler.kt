@@ -14,7 +14,7 @@ class ExceptionHandler {
     fun commonExceptionHandler(e: CommonException) =
         ResponseEntity(
             CommonExceptionResponse(
-                code = e.code,
+                code = e.code!!,
                 message = e.message!!,
                 null
             ),
@@ -22,7 +22,7 @@ class ExceptionHandler {
         )
 
     @ExceptionHandler(RuntimeException::class)
-    fun runtimeExceptionHandler(e: RuntimeException): ResponseEntity<CommonExceptionResponse<Any>> {
+    fun runtimeExceptionHandler(e: RuntimeException): ResponseEntity<CommonExceptionResponse<Any?>> {
         e.printStackTrace()
         return ResponseEntity(
             CommonExceptionResponse(
