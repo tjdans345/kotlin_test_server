@@ -4,12 +4,10 @@ import com.meteor.todolist.global.config.jwt.JwtAuthenticationFilter
 import com.meteor.todolist.global.config.jwt.JwtTokenProvider
 import org.springframework.context.annotation.Bean
 import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.config.http.SessionCreationPolicy
-import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
@@ -35,7 +33,7 @@ class SecurityConfig (private val jwtTokenProvider : JwtTokenProvider) : WebSecu
             .and()
             .authorizeRequests() // 요청에 대한 사용권한 체크
             .antMatchers("/api/**").authenticated()
-            .antMatchers("/register/**", "/login/**", "/logout/**").permitAll() // 해당 경로는 누구나 접근 가능
+            .antMatchers("/auth/register/**", "/login/**", "/logout/**").permitAll() // 해당 경로는 누구나 접근 가능
             .and()
             .addFilterBefore(JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter::class.java)
     }

@@ -1,9 +1,15 @@
 package com.meteor.todolist.global.common.resoponse
 
-import java.time.LocalDateTime
+import com.fasterxml.jackson.annotation.JsonIgnore
 
 data class ResponseDTO<T> (
-    // TODO: ENUM 추가 해보기
-    val data: T,
-    val message: String
-)
+    @JsonIgnore
+    val responseEnum: ResponseEnum,
+    val data: T?,
+    ) {
+
+    val code: Int = responseEnum.code
+    val message: String = responseEnum.message
+
+
+}

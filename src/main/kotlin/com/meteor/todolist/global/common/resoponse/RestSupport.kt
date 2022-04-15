@@ -13,7 +13,7 @@ abstract class RestSupport {
 
     protected open fun <T> response(data: T) : ResponseEntity<Any> {
         return ResponseEntity.ok().contentType(MEDIA_TYPE_APPLICATION_JSON_UTF8)
-            .body(ResponseDTO(data = data, message = "ok"))
+            .body(ResponseDTO(data = data, responseEnum = ResponseEnum.EXAMPLE_ENUM2))
     }
 
     protected open fun unauthorized(message: String): ResponseEntity<Any> {

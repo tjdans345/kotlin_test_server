@@ -7,12 +7,19 @@ import com.meteor.todolist.domain.user.domain.dto.UserRegisterReq
 import com.meteor.todolist.domain.user.domain.dto.naver.NaverData
 import com.meteor.todolist.domain.user.domain.entity.User
 import com.meteor.todolist.domain.user.service.UserService
+import com.meteor.todolist.global.common.resoponse.MEDIA_TYPE_APPLICATION_JSON_UTF8
+import com.meteor.todolist.global.common.resoponse.ResponseDTO
+import com.meteor.todolist.global.common.resoponse.ResponseEnum
+import com.meteor.todolist.global.common.resoponse.RestSupport
+import lombok.RequiredArgsConstructor
 import org.springframework.http.ResponseEntity
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
+@RequestMapping("/auth")
 @RestController
 class UserApiController (private val userService: UserService, private val passwordEncoder: PasswordEncoder) {
 
@@ -28,18 +35,24 @@ class UserApiController (private val userService: UserService, private val passw
     }
 
     @PostMapping("/register")
-    fun register(@RequestBody userRegisterReq: UserRegisterReq): ResponseEntity<User> {
-
+    fun register(@RequestBody userRegisterReq: UserRegisterReq): ResponseEntity<ResponseDTO<User>> {
         if(userService.existsUser(userRegisterReq.userEmail)) {
-            throw Exception("no email");
+            throw Exception("이미 가입되어있는 이메일 입니다.");
         }
         userRegisterReq.userPassword = passwordEncoder.encode(userRegisterReq.userPassword)
 
-        return ResponseEntity.ok(userService.createUser(userRegisterReq))
+        return ResponseEntity.ok().contentType(MEDIA_TYPE_APPLICATION_JSON_UTF8)
+            .body(ResponseDTO(data = userService.createUser(userRegisterReq), responseEnum = ResponseEnum.EXAMPLE_ENUM2))
     }
 
     @PostMapping("/login")
     fun login(@RequestBody userLoginReq: UserLoginReq): ResponseEntity<String> {
+
+//        val userInfo = userService.existsUser(userLoginReq.userEmail);
+//        userInfo.also {
+//            check(it) { throw Exception("ddasdsa")}
+//        }
+
         if(!userService.existsUser(userLoginReq.userEmail)) {
             throw Exception("no email");
         }
