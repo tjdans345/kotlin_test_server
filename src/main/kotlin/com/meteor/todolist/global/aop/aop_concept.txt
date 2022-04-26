@@ -1,0 +1,19 @@
+----- Aspect -----
+Advice, PointCut 의 조합으로 로직을 구현한 구현체
+일반 class 에 Aspect annotation 을 추가하면 Aspect class 로 사용 가능.
+
+----- PointCut -----
+advice 가 실행할 곳을 지정해준다. 하나의 aspect 에는 여러개의 PointCut 이 존재 할 수 있다.
+
+----- Advice -----
+실행할 코드를 정의하는 곳, Advice 의 타입에는 아래와 같은 5가지가 있다.
+- @Before
+ - 함수 실행 전 실행된다
+- @After
+ - 함수 실행 후 실행된다
+- @AfterReturning
+ - 함수가 정상적으로 실행된 후 실행된다.
+- @AfterThrowing
+ - 함수에서 Exception 이 발생했을 경우만 실행된다.
+- @Around
+ - 모든 경우에 대해서 실행된다. 즉 함수가 호출 되면 함수자체를 파라미터로 받아서 실행하고 원하는 기능을 앞뒤에 붙일 수 있다 -> 즉, @Before @After 를 모두 만족할 수 있는 기능을 구현 가능

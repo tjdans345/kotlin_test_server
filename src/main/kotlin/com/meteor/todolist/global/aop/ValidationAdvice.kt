@@ -4,6 +4,7 @@ import com.meteor.todolist.global.error.common.CommonException
 import org.apache.juli.logging.Log
 import org.apache.juli.logging.LogFactory
 import org.aspectj.lang.JoinPoint
+import org.aspectj.lang.annotation.After
 import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Before
 import org.aspectj.lang.annotation.Pointcut
@@ -32,24 +33,24 @@ class ValidationAdvice {
         for (arg in args) {
             if(arg is BindingResult) {
                 if (arg.hasErrors()) {
-                    throw CommonException("Validation Errors", arg.fieldError?.defaultMessage,HttpStatus.BAD_REQUEST)
+                    throw CommonException(code = "Validation Errors", message = arg.fieldError?.defaultMessage, status = HttpStatus.BAD_REQUEST)
                 }
             }
         }
     }
 
-    @Before("@annotation(AuthorDefaultSet2)")
+    @Before("@annotation(CustomAnnotation)")
     fun setAuthorDefault(joinPoint: JoinPoint) {
         val request = (RequestContextHolder.currentRequestAttributes() as ServletRequestAttributes).request // request 정보
-
-        logger.info("Request URI : ${request.requestURI}")
-        logger.info("Request IP : ${request.remoteAddr}")
-        logger.info("Request Method : ${request.method}")
-
+        logger.info("Before")
+//        logger.info("Request URI : ${request.requestURI}")
+//        logger.info("Request IP : ${request.remoteAddr}")
+//        logger.info("Request Method : ${request.method}")
     }
 
-
-
-
-
+    @After("@annotation(CustomAnnotationTest)")
+    fun customAnnotationAdvice() {
+        logger.info("After")
+    }
 }
+

@@ -7,7 +7,8 @@ import com.meteor.todolist.domain.user.domain.dto.UserRegisterReq
 import com.meteor.todolist.domain.user.domain.dto.naver.NaverData
 import com.meteor.todolist.domain.user.domain.entity.User
 import com.meteor.todolist.domain.user.service.UserService
-import com.meteor.todolist.global.aop.AuthorDefaultSet2
+import com.meteor.todolist.global.aop.CustomAnnotation
+import com.meteor.todolist.global.aop.CustomAnnotationTest
 import com.meteor.todolist.global.common.resoponse.MEDIA_TYPE_APPLICATION_JSON_UTF8
 import com.meteor.todolist.global.common.resoponse.ResponseDTO
 import com.meteor.todolist.global.common.resoponse.ResponseEnum
@@ -21,7 +22,8 @@ import org.springframework.web.bind.annotation.*
 @RestController
 class UserApiController (private val userService: UserService, private val passwordEncoder: PasswordEncoder) {
 
-    @AuthorDefaultSet2
+    @CustomAnnotationTest
+    @CustomAnnotation
     @GetMapping
     fun test() {
         println("zzzz")
