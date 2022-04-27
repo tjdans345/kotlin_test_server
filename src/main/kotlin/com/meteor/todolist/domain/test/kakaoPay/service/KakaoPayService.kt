@@ -15,7 +15,7 @@ import java.util.*
 class KakaoPayService {
 
     fun paymentReady(paymentInformation: PaymentInformation) : Test {
-        val key = "3c54ae1d020a61a419548e606d9b85e6"
+        val key = "ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"
         val url = "https://kapi.kakao.com/v1/payment/ready"
         val restTemplate = RestTemplate()
         val header = HttpHeaders()
