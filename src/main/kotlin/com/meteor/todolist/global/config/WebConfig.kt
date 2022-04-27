@@ -13,6 +13,7 @@ class WebConfig : WebMvcConfigurer {
         registry
             .addMapping("/**") // 어떤 경로를 허락 해줄건지 설정하는 부분 => 모든경로는 **
             .allowedOrigins("http://localhost:3000") // 특정 도메인만 허용 해주는 설정
+            .allowedOrigins("http://127.0.0.1:5500") // 특정 도메인만 허용 해주는 설정
             .allowedMethods(
                 HttpMethod.GET.name,
                 HttpMethod.POST.name,

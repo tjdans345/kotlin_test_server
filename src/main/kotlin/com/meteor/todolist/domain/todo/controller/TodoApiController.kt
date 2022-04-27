@@ -11,7 +11,6 @@ class TodoApiController(
     private val todoService: TodoService
 ) {
 
-
     @GetMapping
     fun getTodos(): MutableIterable<Todo> = todoService.getTodos()
 
@@ -25,4 +24,5 @@ class TodoApiController(
     fun deleteTodo(@PathVariable("todoId") todoId: Long) = todoService.deleteTodo(todoId)
 
 }
+
 

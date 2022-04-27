@@ -17,41 +17,36 @@ import java.net.URL
 @Service
 class UserService (private val userRepository: UserRepository, private val jwtTokenProvider: JwtTokenProvider) {
 
+    /**
+     * 토큰 검증 및 유저 데이터 반환 (카카오)
+     */
     fun getResponseFromKakao(kakaoAccessToken: String): KaKaoData {
         val con: HttpURLConnection = URL("https://kapi.kakao.com/v2/user/me").openConnection() as HttpURLConnection
         con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded")
         con.setRequestProperty("Authorization", "Bearer $kakaoAccessToken")
 
-        val responseCode: Int = con.responseCode
-
         val br = BufferedReader(InputStreamReader(con.inputStream))
         val content = br.readText()
         br.close()
 
-
         val data = Gson().fromJson(content, KaKaoData::class.java)
-
-        println(data)
-        println(content)
-        println(responseCode)
 
         return data;
     }
 
+    /**
+     * 토큰 검증 및 유저 데이터 반환 (네이버)
+     */
     fun getResponseFromNaver(NaverAccessToken: String): NaverData {
         val con: HttpURLConnection = URL("https://openapi.naver.com/v1/nid/me").openConnection() as HttpURLConnection
         con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded")
         con.setRequestProperty("Authorization", "Bearer $NaverAccessToken")
 
-        val responseCode: Int = con.responseCode
-
         val br = BufferedReader(InputStreamReader(con.inputStream))
         val content = br.readText()
         br.close()
 
-        val data = Gson().fromJson(content, NaverData::class.java)
-
-        return data;
+        return Gson().fromJson(content, NaverData::class.java);
     }
 
     fun findUser(email: String): User {
