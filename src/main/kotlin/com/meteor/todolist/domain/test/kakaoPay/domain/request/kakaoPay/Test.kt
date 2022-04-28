@@ -20,4 +20,6 @@ data class Test(
     val tid: String,
     @SerializedName("tms_result")
     val tmsResult: Boolean
+
+
 )
