@@ -17,7 +17,7 @@ import java.util.*
 @Service
 class KakaoPayService {
 
-    private final val key = "zzz"
+    private final val key = "3c54ae1d020a61a419548e606d9b85e6"
 
     fun paymentReady(paymentInformation: PaymentInformation) : TestResponse {
 
@@ -38,13 +38,14 @@ class KakaoPayService {
             .queryParam("quantity", paymentInformation.totalCount)
             .queryParam("total_amount", paymentInformation.totalPrice)
             .queryParam("tax_free_amount", "0")
-            .queryParam("approval_url", "http://127.0.0.1:5500/payment/pages/kakao_pay_complete.html")
+            .queryParam("approval_url", "http://127.0.0.1:5501/payment/pages/kakao_pay_complete.html")
+//            .queryParam("approval_url", "http://192.168.0.49:5500/payment/pages/kakao_pay_complete.html")
             .queryParam("cancel_url", "http://localhost:9090/kakao/cancel")
             .queryParam("fail_url", "http://localhost:9090/kakao/fail")
             .build()
 
         val responseData = restTemplate.exchange(uri.toString(), HttpMethod.POST, entity, String::class.java)
-        println("responseDate : ${responseData.body}")
+//        println("responseDate : ${responseData.body}")
         val payReadyData =  Gson().fromJson(responseData.body, Test::class.java)
         return TestResponse(payReadyData, partnerOrderId, partnerUserId)
     }
@@ -66,7 +67,7 @@ class KakaoPayService {
             .build()
 
         val responseData = restTemplate.exchange(uri.toString(), HttpMethod.POST, entity, String::class.java)
-        println("responseDate : ${responseData.body}")
+//        println("responseDate : ${responseData.body}")
         println("결제 완료 !!!")
         return Gson().fromJson(responseData.body, PayCompleteResponse::class.java)
     }
