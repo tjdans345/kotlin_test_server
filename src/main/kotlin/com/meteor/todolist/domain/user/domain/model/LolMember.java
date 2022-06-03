@@ -45,3 +45,16 @@
 //// 1. 기준이 되는 유저의 정보 데이터
 //// 2. 그 외 쭉정이 유저들 리스트
 //
+
+//import java.util.List;
+//
+//// 맥도날드 메뉴리스트 api
+//class 햄버거 {
+//    private String image;
+//    private String name;
+//    private int price;
+//}
+
+// searchValue > 매칭 데이터 핸들링
+
+// 맥도날드 "더블치즈버거"
