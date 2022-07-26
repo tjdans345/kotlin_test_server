@@ -5,6 +5,7 @@ data class CompleteInformation(
     val pgToken: String,
     val partnerOrderId: String,
     val partnerUserId: String
+    val partnerTestId: String
 ) {
 
 }
